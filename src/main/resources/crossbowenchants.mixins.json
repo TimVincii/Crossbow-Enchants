@@ -1,0 +1,13 @@
+{
+	"required": true,
+	"package": "me.timvinci.crossbowenchants.mixins",
+	"compatibilityLevel": "JAVA_17",
+	"mixins": [
+		"CrossbowItemAccessorMixin",
+		"CrossbowItemMixin",
+		"EnchantmentMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}
