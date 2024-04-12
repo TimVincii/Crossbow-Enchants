@@ -1,4 +1,4 @@
-![Crossbow Enchants Banner](https://cdn.modrinth.com/data/cached_images/f197c588bdc5e765e649b201033cfe481c98ada5.png)
+![Crossbow Enchants Banner](https://cdn.modrinth.com/data/cached_images/fcddfcc090ddbd42fd62917921734b6634939cc3.png)
 
 # Crossbow Enchants
 
