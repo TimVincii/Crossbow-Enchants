@@ -45,7 +45,7 @@ public class CrossbowItemMixin {
         // Note that the PersistentProjectileEntityHelper class will only apply the enchantment effect if the
         // corresponding setting is enabled, and if the crossbow actually has said enchantment.
         PersistentProjectileEntityHelper.applyFlameEnchant(persistentProjectileEntity, crossbow);
-        PersistentProjectileEntityHelper.applyInfinityEnchant(persistentProjectileEntity, crossbow);
+        PersistentProjectileEntityHelper.applyInfinityEnchant(persistentProjectileEntity, crossbow, arrow);
         PersistentProjectileEntityHelper.applyPowerEnchant(persistentProjectileEntity, crossbow);
         PersistentProjectileEntityHelper.applyPunchEnchant(persistentProjectileEntity, crossbow);
     }

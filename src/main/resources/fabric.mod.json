@@ -3,7 +3,7 @@
 	"id": "crossbowenchants",
 	"version": "${version}",
 	"name": "Crossbow Enchants",
-	"description": "Enhance crossbows to the point where they can actually compete with bows.",
+	"description": "Enchant crossbows to the point where they can actually compete with bows.",
 	"authors": [
 		"TimVinci"
 	],
@@ -24,9 +24,9 @@
 		"crossbowenchants.mixins.json"
 	],
 	"depends": {
-		"fabricloader": "*",
+		"fabricloader": ">=0.14.0",
 		"minecraft": ">=1.20.4",
 		"java": ">=17",
-		"fabric-api": "*"
+		"fabric-api": ">=0.91.1"
 	}
 }

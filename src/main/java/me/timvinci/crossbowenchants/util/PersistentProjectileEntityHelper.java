@@ -5,6 +5,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 
 // This small class separates the enchanting logic from the CrossbowItemMixin class.
 // All enchantment logic seen here is copied from the BowItem class.
@@ -14,10 +15,10 @@ public class PersistentProjectileEntityHelper {
             entity.setOnFireFor(100);
     }
 
-    // This method only sets the arrows pick-ability to creative if the crossbow has infinity, the rest of the logic
+    // This method only sets the arrows pick-ability to creative if the crossbow has infinity and the projectile is an arrow, the rest of the logic
     // behind infinity functioning on crossbows is applied in CrossbowItemMixin.retrieveArrowServerSide / retrieveArrowClientSide.
-    public static void applyInfinityEnchant(PersistentProjectileEntity entity, ItemStack crossbow) {
-        if (ConfigManager.getConfig().isInfinityEnabled() && EnchantmentHelper.getLevel(Enchantments.INFINITY, crossbow) > 0)
+    public static void applyInfinityEnchant(PersistentProjectileEntity entity, ItemStack crossbow, ItemStack projectile) {
+        if (ConfigManager.getConfig().isInfinityEnabled() && EnchantmentHelper.getLevel(Enchantments.INFINITY, crossbow) > 0 && projectile.isOf(Items.ARROW))
             entity.pickupType = PersistentProjectileEntity.PickupPermission.CREATIVE_ONLY;
     }
 
