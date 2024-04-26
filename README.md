@@ -8,10 +8,10 @@ In addition to that, the mod also supports making Infinity and Mending compatibl
 
 
 Although this mod was initially made to work on the server side exclusively, it works perfectly fine on singleplayer too.
-If you plan on running this mod on the server side, the players don't need to have it installed on the client side.
+If you plan on running this mod on the server side, the players do **not** need to have it installed on the client side.
 
 ## Commands
-Using the following commands, you can customize the functionality of the mod, note that players must have operator status to use these commands on a server:
+Using the following commands, you can customize the functionality of the mod, **note that players must have operator status to use these commands on a server**:
 - `/crossbowenchants <disable/enable>` - A toggle command for the global functionality of the mod.
 - `/crossbowenchants enchantments <disable/enable> <enchantment>` - Disable or enable a specific enchantment.
 - `/crossbowenchants features <disable/enable> <feature>` - Disable or enable a specific feature, features include Infinity-And-Mending, and Piercing-And-Multishot.
@@ -38,21 +38,21 @@ InfinityAndMendingEnabled = true
 #A toggle for the compatibility of Piercing and Multishot on crossbows.
 PiercingAndMultishotEnabled = true
 ```
-Note that the config will not reset if any property is missing or improperly formatted, instead, the mod will use the default value for that property, which is 'true' in all cases.
+**Note that the config will not reset if any property is missing or improperly formatted, instead, the mod will use the default value for that property, which is 'true' in all cases.**
 
 ## Dependencies
 Fabric API: Crossbow Enchants requires the Fabric API to function properly. Ensure you have it installed alongside the mod before starting your client or server.
 
 ## Additional Info
 ### Enchantment Behavior
-Note that disabling any of the enchantments will result in two specific outcomes:
+Note that disabling any of the enchantments will result in the following outcome:
 
 - The enchantments will no longer be appliable to crossbows through the use of an anvil.
 
-- The enchantments will stop functioning on pre-existing crossbows that are enchanted with them.
+- **[Minecraft 1.20.4 Only]** The enchantments will stop functioning on pre-existing crossbows that are enchanted with them.
 
 ### Feature Behavior
-Note that disabling a feature will result in only one outcome:
+Note that disabling a feature will result in the following outcome:
 
 - The enchantments that are affected by the feature will no longer be compatible with each other through the use of an anvil, but will work perfectly normal on pre-existing items that are enchanted with them.
 
@@ -66,4 +66,3 @@ Although I might make a setting for this specific case in the future.
 This is the first mod I developed for Fabric and Quilt, and while there are no currently known issues, I doubt it will stay that way in the future.
 
 If you run into any problems, don't hesitate to [submit an issue](https://github.com/TimVincii/Crossbow-Enchants/issues).
-
