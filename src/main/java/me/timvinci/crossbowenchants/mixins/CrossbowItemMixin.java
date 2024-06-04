@@ -58,8 +58,8 @@ public class CrossbowItemMixin {
     @Environment(EnvType.SERVER)
     @Inject(method = "loadProjectile", at = @At("HEAD"), cancellable = true)
     private static void retrieveArrowServerSide(LivingEntity shooter, ItemStack crossbow, ItemStack projectile, boolean simulated, boolean creative, CallbackInfoReturnable<Boolean> cir) {
-        // If the player is in creative, or this projectile is added by the Multishot enchantment, we return.
-        if (creative || simulated)
+        // If the player is in creative, this projectile is added by the Multishot enchantment, or the shooter isn't a player (pillager, skeleton..), we return.
+        if (creative || simulated || !(shooter instanceof PlayerEntity))
             return;
 
         // If the mod is disabled, the infinity option is disabled, or the crossbow isn't enchanted with infinity,
@@ -91,8 +91,8 @@ public class CrossbowItemMixin {
     @Environment(EnvType.CLIENT)
     @Inject(method = "loadProjectile", at = @At("HEAD"), cancellable = true)
     private static void retrieveArrowClientSide(LivingEntity shooter, ItemStack crossbow, ItemStack projectile, boolean simulated, boolean creative, CallbackInfoReturnable<Boolean> cir) {
-        // If the player is in creative, or this projectile is added by the Multishot enchantment, we return.
-        if (creative || simulated)
+        // If the player is in creative, this projectile is added by the Multishot enchantment, or the shooter isn't a player (pillager, skeleton..), we return.
+        if (creative || simulated || !(shooter instanceof PlayerEntity))
             return;
 
         // If the mod is disabled, the infinity option is disabled, or the crossbow isn't enchanted with infinity,
