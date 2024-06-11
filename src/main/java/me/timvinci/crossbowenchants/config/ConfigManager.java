@@ -91,7 +91,7 @@ public class ConfigManager {
     }
 
     public static Text getConfigInfo() {
-        return ColoredTextFormatter.formatTitleText("Crossbow Enchants [" + Reference.VERSION + ']')
+        return ColoredTextFormatter.formatTitleText("Crossbow Enchants [" + Reference.MOD_VERSION + ']')
                 .append(ColoredTextFormatter.formatBooleanText("\nEnabled:", config.isEnabled()))
                 .append(ColoredTextFormatter.formatBooleanText("\nFlame Enabled:", config.isFlameEnabled()))
                 .append(ColoredTextFormatter.formatBooleanText("\nInfinity Enabled:", config.isInfinityEnabled()))

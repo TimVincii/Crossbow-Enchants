@@ -2,56 +2,56 @@ package me.timvinci.crossbowenchants.config;
 
 // The config class of the mod.
 public class ModConfig {
-    private boolean Enabled = true;
-    private boolean FlameEnabled = true;
-    private boolean InfinityEnabled = true;
-    private boolean PowerEnabled = true;
-    private boolean PunchEnabled = true;
-    private boolean InfinityAndMendingEnabled = true;
-    private boolean PiercingAndMultishotEnabled = true;
+    private boolean enabled = true;
+    private boolean flameEnabled = true;
+    private boolean infinityEnabled = true;
+    private boolean powerEnabled = true;
+    private boolean punchEnabled = true;
+    private boolean infinityAndMendingEnabled = true;
+    private boolean piercingAndMultishotEnabled = true;
     public boolean isEnabled() {
-        return Enabled;
+        return enabled;
     }
 
-    public void setEnabled(boolean Enabled) {
-        this.Enabled = Enabled;
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public boolean isFlameEnabled() {
-        return FlameEnabled;
+        return flameEnabled;
     }
 
-    public void setFlameEnabled(boolean FlameEnabled) {
-        this.FlameEnabled = FlameEnabled;
+    public void setFlameEnabled(boolean flameEnabled) {
+        this.flameEnabled = flameEnabled;
     }
     public boolean isInfinityEnabled() {
-        return InfinityEnabled;
+        return infinityEnabled;
     }
-    public void setInfinityEnabled(boolean InfinityEnabled) {
-        this.InfinityEnabled = InfinityEnabled;
+    public void setInfinityEnabled(boolean infinityEnabled) {
+        this.infinityEnabled = infinityEnabled;
     }
     public boolean isPowerEnabled() {
-        return PowerEnabled;
+        return powerEnabled;
     }
-    public void setPowerEnabled(boolean PowerEnabled) {
-        this.PowerEnabled = PowerEnabled;
+    public void setPowerEnabled(boolean powerEnabled) {
+        this.powerEnabled = powerEnabled;
     }
     public boolean isPunchEnabled() {
-        return PunchEnabled;
+        return punchEnabled;
     }
-    public void setPunchEnabled(boolean PunchEnabled) {
-        this.PunchEnabled = PunchEnabled;
+    public void setPunchEnabled(boolean punchEnabled) {
+        this.punchEnabled = punchEnabled;
     }
     public boolean isInfinityAndMendingEnabled() {
-        return InfinityAndMendingEnabled;
+        return infinityAndMendingEnabled;
     }
-    public void setInfinityAndMendingEnabled(boolean InfinityAndMendingEnabled) {
-        this.InfinityAndMendingEnabled = InfinityAndMendingEnabled;
+    public void setInfinityAndMendingEnabled(boolean infinityAndMendingEnabled) {
+        this.infinityAndMendingEnabled = infinityAndMendingEnabled;
     }
     public boolean isPiercingAndMultishotEnabled() {
-        return PiercingAndMultishotEnabled;
+        return piercingAndMultishotEnabled;
     }
-    public void setPiercingAndMultishotEnabled(boolean PiercingAndMultishotEnabled) {
-        this.PiercingAndMultishotEnabled = PiercingAndMultishotEnabled;
+    public void setPiercingAndMultishotEnabled(boolean piercingAndMultishotEnabled) {
+        this.piercingAndMultishotEnabled = piercingAndMultishotEnabled;
     }
 }

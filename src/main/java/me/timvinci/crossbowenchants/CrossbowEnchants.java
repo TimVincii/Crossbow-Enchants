@@ -15,7 +15,7 @@ public class CrossbowEnchants implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        LOGGER.info("Initializing Crossbow Enchants [" + Reference.VERSION + "].");
+        LOGGER.info("Initializing Crossbow Enchants [" + Reference.MOD_VERSION + "].");
         ConfigManager.loadConfig();
         ModCommands.registerCommands();
     }
