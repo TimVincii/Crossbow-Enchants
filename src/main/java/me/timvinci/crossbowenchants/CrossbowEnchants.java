@@ -11,11 +11,11 @@ import org.apache.logging.log4j.Logger;
 // Responsible for calling the load of the config and for calling the registration of the commands.
 public class CrossbowEnchants implements ModInitializer {
 
-    public static final Logger LOGGER = LogManager.getLogger("crossbowenchants");
+    public static final Logger LOGGER = LogManager.getLogger(Reference.MOD_ID);
 
     @Override
     public void onInitialize() {
-        LOGGER.info("Initializing Crossbow Enchants [" + Reference.MOD_VERSION + "].");
+        LOGGER.info("Initializing " + Reference.MOD_NAME + " [" + Reference.MOD_VERSION + "].");
         ConfigManager.loadConfig();
         ModCommands.registerCommands();
     }
