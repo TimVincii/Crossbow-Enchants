@@ -3,6 +3,7 @@
 	"package": "me.timvinci.crossbowenchants.mixins",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
+		"EnchantmentAccessor",
 		"EnchantmentMixin"
 	],
 	"injectors": {
