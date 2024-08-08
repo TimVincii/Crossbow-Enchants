@@ -1,9 +1,15 @@
 package me.timvinci.crossbowenchants.commands;
 
+import com.mojang.brigadier.context.CommandContext;
 import me.timvinci.crossbowenchants.config.ConfigManager;
+import me.timvinci.crossbowenchants.config.CrossbowEnchantsConfig;
 import me.timvinci.crossbowenchants.util.ColoredTextFormatter;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.minecraft.server.command.CommandManager;
+import net.minecraft.server.command.ServerCommandSource;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 // A class responsible for registering the commands, not much else to say about it.
 public class CrossbowEnchantsCommands {
@@ -11,127 +17,57 @@ public class CrossbowEnchantsCommands {
         CommandRegistrationCallback.EVENT.register((dispatcher, dedicated, environment) -> dispatcher.register(CommandManager.literal("crossbowenchants")
             .requires(source -> source.hasPermissionLevel(2))
                 .then(CommandManager.literal("disable")
-                        .executes(context -> {
-                            ConfigManager.getConfig().setEnabled(false);
-                            ConfigManager.saveConfig();
-                            context.getSource().sendFeedback(() -> ColoredTextFormatter.formatBooleanTextEnabledDisabled("Crossbow Enchants successfully", false), false);
-                            return 1;
-                        })
+                        .executes(context -> modifyProperty(context, "setEnabled", "Crossbow Enchants successfully", false))
                 )
                 .then(CommandManager.literal("enable")
-                        .executes(context -> {
-                            ConfigManager.getConfig().setEnabled(true);
-                            ConfigManager.saveConfig();
-                            context.getSource().sendFeedback(() -> ColoredTextFormatter.formatBooleanTextEnabledDisabled("Crossbow Enchants successfully", true), false);
-                            return 1;
-                        })
+                        .executes(context -> modifyProperty(context, "setEnabled", "Crossbow Enchants successfully", true))
                 )
                 .then(CommandManager.literal("enchantments")
                         .then(CommandManager.literal("disable")
                             .then(CommandManager.literal("flame")
-                                    .executes(context -> {
-                                        ConfigManager.getConfig().setFlameEnabled(false);
-                                        ConfigManager.saveConfig();
-                                        context.getSource().sendFeedback(() -> ColoredTextFormatter.formatBooleanTextEnabledDisabled("Flame enchantment on crossbows successfully", false), false);
-                                        return 1;
-                                    })
+                                    .executes(context -> modifyProperty(context, "setFlameEnabled", "Flame enchantment on crossbows successfully", false))
                             )
                             .then(CommandManager.literal("infinity")
-                                    .executes(context -> {
-                                        ConfigManager.getConfig().setInfinityEnabled(false);
-                                        ConfigManager.saveConfig();
-                                        context.getSource().sendFeedback(() -> ColoredTextFormatter.formatBooleanTextEnabledDisabled("Infinity enchantment on crossbows successfully", false), false);
-                                        return 1;
-                                    })
+                                    .executes(context -> modifyProperty(context, "setInfinityEnabled", "Infinity enchantment on crossbows successfully", false))
                             )
                             .then(CommandManager.literal("power")
-                                    .executes(context -> {
-                                        ConfigManager.getConfig().setPowerEnabled(false);
-                                        ConfigManager.saveConfig();
-                                        context.getSource().sendFeedback(() -> ColoredTextFormatter.formatBooleanTextEnabledDisabled("Power enchantment on crossbows successfully", false), false);
-                                        return 1;
-                                    })
+                                    .executes(context -> modifyProperty(context, "setPowerEnabled", "Power enchantment on crossbows successfully", false))
                             )
                             .then(CommandManager.literal("punch")
-                                    .executes(context -> {
-                                        ConfigManager.getConfig().setPunchEnabled(false);
-                                        ConfigManager.saveConfig();
-                                        context.getSource().sendFeedback(() -> ColoredTextFormatter.formatBooleanTextEnabledDisabled("Punch enchantment on crossbows successfully", false), false);
-                                        return 1;
-                                    })
+                                    .executes(context -> modifyProperty(context, "setPunchEnabled", "Punch enchantment on crossbows successfully", false))
                             )
                         )
                         .then(CommandManager.literal("enable")
                             .then(CommandManager.literal("flame")
-                                .executes(context -> {
-                                    ConfigManager.getConfig().setFlameEnabled(true);
-                                    ConfigManager.saveConfig();
-                                    context.getSource().sendFeedback(() -> ColoredTextFormatter.formatBooleanTextEnabledDisabled("Flame enchantment on crossbows successfully", true), false);
-                                    return 1;
-                                })
+                                    .executes(context -> modifyProperty(context, "setFlameEnabled", "Flame enchantment on crossbows successfully", true))
                             )
                             .then(CommandManager.literal("infinity")
-                                    .executes(context -> {
-                                        ConfigManager.getConfig().setInfinityEnabled(true);
-                                        ConfigManager.saveConfig();
-                                        context.getSource().sendFeedback(() -> ColoredTextFormatter.formatBooleanTextEnabledDisabled("Infinity enchantment on crossbows successfully", true), false);
-                                        return 1;
-                                    })
+                                    .executes(context -> modifyProperty(context, "setInfinityEnabled", "Infinity enchantment on crossbows successfully", true))
                             )
                             .then(CommandManager.literal("power")
-                                    .executes(context -> {
-                                        ConfigManager.getConfig().setPowerEnabled(true);
-                                        ConfigManager.saveConfig();
-                                        context.getSource().sendFeedback(() -> ColoredTextFormatter.formatBooleanTextEnabledDisabled("Power enchantment on crossbows successfully", true), false);
-                                        return 1;
-                                    })
+                                    .executes(context -> modifyProperty(context, "setPowerEnabled", "Power enchantment on crossbows successfully", true))
                             )
                             .then(CommandManager.literal("punch")
-                                    .executes(context -> {
-                                        ConfigManager.getConfig().setPunchEnabled(true);
-                                        ConfigManager.saveConfig();
-                                        context.getSource().sendFeedback(() -> ColoredTextFormatter.formatBooleanTextEnabledDisabled("Punch enchantment on crossbows successfully", true), false);
-                                        return 1;
-                                    })
+                                    .executes(context -> modifyProperty(context, "setPunchEnabled", "Punch enchantment on crossbows successfully", true))
                             )
                         )
                 )
                 .then(CommandManager.literal("features")
                         .then(CommandManager.literal("disable")
                             .then(CommandManager.literal("infinity-and-mending")
-                                    .executes(context -> {
-                                        ConfigManager.getConfig().setInfinityAndMendingEnabled(false);
-                                        ConfigManager.saveConfig();
-                                        context.getSource().sendFeedback(() -> ColoredTextFormatter.formatBooleanTextEnabledDisabled("Infinity And Mending on crossbows successfully", false), false);
-                                        return 1;
-                                    })
+                                    .executes(context -> modifyProperty(context, "setInfinityAndMendingEnabled", "Infinity And Mending on crossbows and bows successfully", false))
                             )
                             .then(CommandManager.literal("piercing-and-multishot")
-                                    .executes(context -> {
-                                        ConfigManager.getConfig().setPiercingAndMultishotEnabled(false);
-                                        ConfigManager.saveConfig();
-                                        context.getSource().sendFeedback(() -> ColoredTextFormatter.formatBooleanTextEnabledDisabled("Piercing And Multishot on crossbows successfully", false), false);
-                                        return 1;
-                                    })
+                                    .executes(context -> modifyProperty(context, "setPiercingAndMultishotEnabled", "Piercing And Multishot on crossbows successfully", false))
                             )
                         )
                         .then(CommandManager.literal("enable")
-                            .then(CommandManager.literal("infinity-and-mending")
-                                    .executes(context -> {
-                                        ConfigManager.getConfig().setInfinityAndMendingEnabled(true);
-                                        ConfigManager.saveConfig();
-                                        context.getSource().sendFeedback(() -> ColoredTextFormatter.formatBooleanTextEnabledDisabled("Infinity And Mending on crossbows successfully", true), false);
-                                        return 1;
-                                    })
-                            )
-                            .then(CommandManager.literal("piercing-and-multishot")
-                                    .executes(context -> {
-                                        ConfigManager.getConfig().setPiercingAndMultishotEnabled(true);
-                                        ConfigManager.saveConfig();
-                                        context.getSource().sendFeedback(() -> ColoredTextFormatter.formatBooleanTextEnabledDisabled("Piercing And Multishot on crossbows successfully", true), false);
-                                        return 1;
-                                    })
-                            )
+                                .then(CommandManager.literal("infinity-and-mending")
+                                        .executes(context -> modifyProperty(context, "setInfinityAndMendingEnabled", "Infinity And Mending on crossbows and bows successfully", true))
+                                )
+                                .then(CommandManager.literal("piercing-and-multishot")
+                                        .executes(context -> modifyProperty(context, "setPiercingAndMultishotEnabled", "Piercing And Multishot on crossbows successfully", true))
+                                )
                         )
                 )
                 .then(CommandManager.literal("info")
@@ -144,11 +80,23 @@ public class CrossbowEnchantsCommands {
                         .executes(context -> {
                             ConfigManager.resetConfig();
                             ConfigManager.saveConfig();
-                            context.getSource().sendFeedback(() -> ColoredTextFormatter.formatTitleText("Crossbow Enchants settings were successfully reset to default."), false);
+                            context.getSource().sendFeedback(() -> ColoredTextFormatter.formatTitleText("Crossbow Enchants settings were successfully reset to default."), true);
                             return 1;
                         })
                 )
         ));
     }
 
+    private static int modifyProperty(CommandContext<ServerCommandSource> context, String methodName, String feedbackMessage, boolean newValue) {
+        try {
+            Method propertySetter = CrossbowEnchantsConfig.class.getDeclaredMethod(methodName, boolean.class);
+            propertySetter.invoke(ConfigManager.getConfig(), newValue);
+        } catch (InvocationTargetException | NoSuchMethodException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+        ConfigManager.saveConfig();
+        context.getSource().sendFeedback(() -> ColoredTextFormatter.formatBooleanTextEnabledDisabled(feedbackMessage, newValue), true);
+
+        return 1;
+    }
 }
