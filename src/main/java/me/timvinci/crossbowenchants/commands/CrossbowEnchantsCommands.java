@@ -3,7 +3,7 @@ package me.timvinci.crossbowenchants.commands;
 import com.mojang.brigadier.context.CommandContext;
 import me.timvinci.crossbowenchants.config.ConfigManager;
 import me.timvinci.crossbowenchants.config.CrossbowEnchantsConfig;
-import me.timvinci.crossbowenchants.util.ColoredTextFormatter;
+import me.timvinci.crossbowenchants.util.TextStyler;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
@@ -80,7 +80,7 @@ public class CrossbowEnchantsCommands {
                         .executes(context -> {
                             ConfigManager.resetConfig();
                             ConfigManager.saveConfig();
-                            context.getSource().sendFeedback(() -> ColoredTextFormatter.formatTitleText("Crossbow Enchants settings were successfully reset to default."), true);
+                            context.getSource().sendFeedback(() -> TextStyler.styleTitleText("Crossbow Enchants settings were successfully reset to default."), true);
                             return 1;
                         })
                 )
@@ -95,7 +95,7 @@ public class CrossbowEnchantsCommands {
             throw new RuntimeException(e);
         }
         ConfigManager.saveConfig();
-        context.getSource().sendFeedback(() -> ColoredTextFormatter.formatBooleanTextEnabledDisabled(feedbackMessage, newValue), true);
+        context.getSource().sendFeedback(() -> TextStyler.styleEnabledDisabledText(feedbackMessage, newValue), true);
 
         return 1;
     }

@@ -2,10 +2,9 @@ package me.timvinci.crossbowenchants.config;
 
 import com.electronwill.nightconfig.core.file.CommentedFileConfig;
 import com.electronwill.nightconfig.core.io.ParsingException;
-import com.electronwill.nightconfig.core.io.ParsingMode;
 import com.electronwill.nightconfig.core.io.WritingMode;
 import me.timvinci.crossbowenchants.CrossbowEnchants;
-import me.timvinci.crossbowenchants.util.ColoredTextFormatter;
+import me.timvinci.crossbowenchants.util.TextStyler;
 import me.timvinci.crossbowenchants.util.Reference;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.text.Text;
@@ -88,14 +87,14 @@ public class ConfigManager {
     }
 
     public static Text getConfigInfo() {
-        return ColoredTextFormatter.formatTitleText("Crossbow Enchants [" + Reference.MOD_VERSION + ']')
-                .append(ColoredTextFormatter.formatBooleanText("\nEnabled:", config.isEnabled()))
-                .append(ColoredTextFormatter.formatBooleanText("\nFlame Enabled:", config.isFlameEnabled()))
-                .append(ColoredTextFormatter.formatBooleanText("\nInfinity Enabled:", config.isInfinityEnabled()))
-                .append(ColoredTextFormatter.formatBooleanText("\nPower Enabled:", config.isPowerEnabled()))
-                .append(ColoredTextFormatter.formatBooleanText("\nPunch Enabled:", config.isPunchEnabled()))
-                .append(ColoredTextFormatter.formatBooleanText("\nInfinity-And-Mending Enabled:", config.isInfinityAndMendingEnabled()))
-                .append(ColoredTextFormatter.formatBooleanText("\nPiercing-And-Multishot Enabled:", config.isPiercingAndMultishotEnabled()));
+        return TextStyler.styleTitleText("Crossbow Enchants [" + Reference.MOD_VERSION + ']')
+                .append(TextStyler.styleBooleanText("\nEnabled:", config.isEnabled()))
+                .append(TextStyler.styleBooleanText("\nFlame Enabled:", config.isFlameEnabled()))
+                .append(TextStyler.styleBooleanText("\nInfinity Enabled:", config.isInfinityEnabled()))
+                .append(TextStyler.styleBooleanText("\nPower Enabled:", config.isPowerEnabled()))
+                .append(TextStyler.styleBooleanText("\nPunch Enabled:", config.isPunchEnabled()))
+                .append(TextStyler.styleBooleanText("\nInfinity-And-Mending Enabled:", config.isInfinityAndMendingEnabled()))
+                .append(TextStyler.styleBooleanText("\nPiercing-And-Multishot Enabled:", config.isPiercingAndMultishotEnabled()));
     }
 
     public static CrossbowEnchantsConfig getConfig() {
