@@ -1,7 +1,7 @@
 package me.timvinci.crossbowenchants.config;
 
 // The config class of the mod.
-public class ModConfig {
+public class CrossbowEnchantsConfig {
     private boolean enabled = true;
     private boolean flameEnabled = true;
     private boolean infinityEnabled = true;

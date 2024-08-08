@@ -1,6 +1,6 @@
 package me.timvinci.crossbowenchants;
 
-import me.timvinci.crossbowenchants.commands.ModCommands;
+import me.timvinci.crossbowenchants.commands.CrossbowEnchantsCommands;
 import me.timvinci.crossbowenchants.config.ConfigManager;
 import me.timvinci.crossbowenchants.util.Reference;
 import net.fabricmc.api.ModInitializer;
@@ -17,6 +17,6 @@ public class CrossbowEnchants implements ModInitializer {
     public void onInitialize() {
         LOGGER.info("Initializing " + Reference.MOD_NAME + " [" + Reference.MOD_VERSION + "].");
         ConfigManager.loadConfig();
-        ModCommands.registerCommands();
+        CrossbowEnchantsCommands.registerCommands();
     }
 }

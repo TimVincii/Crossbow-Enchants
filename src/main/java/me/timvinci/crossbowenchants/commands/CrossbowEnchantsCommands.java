@@ -6,7 +6,7 @@ import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.minecraft.server.command.CommandManager;
 
 // A class responsible for registering the commands, not much else to say about it.
-public class ModCommands {
+public class CrossbowEnchantsCommands {
     public static void registerCommands() {
         CommandRegistrationCallback.EVENT.register((dispatcher, dedicated, environment) -> dispatcher.register(CommandManager.literal("crossbowenchants")
             .requires(source -> source.hasPermissionLevel(2))

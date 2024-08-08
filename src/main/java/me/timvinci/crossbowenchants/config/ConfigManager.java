@@ -12,7 +12,7 @@ import java.nio.file.Path;
 public class ConfigManager {
 
     private static final Path CONFIG_FILE_PATH = FabricLoader.getInstance().getConfigDir().resolve("crossbowenchants.toml");
-    private static ModConfig config = new ModConfig();
+    private static CrossbowEnchantsConfig config = new CrossbowEnchantsConfig();
 
     public static void loadConfig() {
         CommentedFileConfig fileConfig = CommentedFileConfig.builder(CONFIG_FILE_PATH)
@@ -101,7 +101,7 @@ public class ConfigManager {
                 .append(ColoredTextFormatter.formatBooleanText("\nPiercing-And-Multishot Enabled:", config.isPiercingAndMultishotEnabled()));
     }
 
-    public static ModConfig getConfig() {
+    public static CrossbowEnchantsConfig getConfig() {
         return config;
     }
 }
