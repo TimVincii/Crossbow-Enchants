@@ -10,26 +10,30 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.text.Text;
 import java.nio.file.Path;
 
-// The mod's config manager class, powered by NightConfig.
 public class ConfigManager {
 
     private static final Path CONFIG_FILE_PATH = FabricLoader.getInstance().getConfigDir().resolve("crossbowenchants.toml");
     private static final CrossbowEnchantsConfig config = new CrossbowEnchantsConfig();
 
     public static void loadConfig() {
+        // Building the CommentedFileConfig.
         CommentedFileConfig fileConfig = buildFileConfig();
+        // Trying to load the config, and catching any parsing issues.
         try {
             fileConfig.load();
         }
         catch (ParsingException exception) {
+            // Adding more info to the parsing exception, then rethrowing it.
             String exceptionMessage = Reference.MOD_NAME + ": Config parsing failed, please validate the config properties in .\\config\\crossbowenchants.toml. Exception message: " + exception.getMessage();
             throw new ParsingException(exceptionMessage);
         }
 
+        // Creating the config file if it doesn't exist or is empty.
         if (!fileConfig.getFile().exists() || fileConfig.isEmpty()) {
             fileConfig.close();
             saveConfig();
         } else {
+            // Reading from the config file it if exists.
             config.setEnabled(getBooleanProperty(fileConfig, "Enabled"));
             config.setFlameEnabled(getBooleanProperty(fileConfig, "FlameEnabled"));
             config.setInfinityEnabled(getBooleanProperty(fileConfig, "InfinityEnabled"));
@@ -37,20 +41,25 @@ public class ConfigManager {
             config.setPunchEnabled(getBooleanProperty(fileConfig, "PunchEnabled"));
             config.setInfinityAndMendingEnabled(getBooleanProperty(fileConfig, "InfinityAndMendingEnabled"));
             config.setPiercingAndMultishotEnabled(getBooleanProperty(fileConfig, "PiercingAndMultishotEnabled"));
+
             fileConfig.close();
         }
     }
 
     public static void saveConfig() {
+        // Building the CommentedFileConfig.
         CommentedFileConfig fileConfig = buildFileConfig();
+        // Trying to load the config, and catching any parsing issues.
         try {
             fileConfig.load();
         }
         catch (ParsingException exception) {
+            // Adding more info to the parsing exception, then rethrowing it.
             String exceptionMessage = Reference.MOD_NAME + ": Config parsing failed, please validate the config properties in .\\config\\crossbowenchants.toml. Exception message: " + exception.getMessage();
             throw new ParsingException(exceptionMessage);
         }
 
+        // Setting the properties alongside their default values and their comments.
         fileConfig.set("Enabled", config.isEnabled());
         fileConfig.setComment("Enabled", "A toggle for the global functionality of Crossbow Enchants.");
 
@@ -72,11 +81,13 @@ public class ConfigManager {
         fileConfig.set("PiercingAndMultishotEnabled", config.isPiercingAndMultishotEnabled());
         fileConfig.setComment("PiercingAndMultishotEnabled", "A toggle for the compatibility of Piercing and Multishot on crossbows.");
 
+        // Saving and closing the file config.
         fileConfig.save();
         fileConfig.close();
     }
 
     public static void resetConfig() {
+        // Resetting the values to their default, which is 'true' in all cases.
         config.setEnabled(true);
         config.setFlameEnabled(true);
         config.setInfinityEnabled(true);
@@ -87,6 +98,7 @@ public class ConfigManager {
     }
 
     public static Text getConfigInfo() {
+        // Returning a text filled with the state of every property.
         return TextStyler.styleTitleText("Crossbow Enchants [" + Reference.MOD_VERSION + ']')
                 .append(TextStyler.styleBooleanText("\nEnabled:", config.isEnabled()))
                 .append(TextStyler.styleBooleanText("\nFlame Enabled:", config.isFlameEnabled()))
@@ -102,17 +114,22 @@ public class ConfigManager {
     }
 
     private static boolean getBooleanProperty(CommentedFileConfig fileConfig, String path) {
+        // Checking if the config file contains the path.
         if (fileConfig.contains(path)) {
+            // Reading and returning the property.
             return fileConfig.get(path);
         }
         else {
+            // Logging any missing properties.
             CrossbowEnchants.LOGGER.error("Configuration property '{}' is missing from the config file, using default value 'true' instead.", path);
         }
 
+        // Returning 'true', the default value of all properties.
         return true;
     }
 
     private static CommentedFileConfig buildFileConfig() {
+        // Building the CommentedFileConfig with some specific settings.
         return CommentedFileConfig.builder(CONFIG_FILE_PATH)
                 .sync()
                 .autosave()

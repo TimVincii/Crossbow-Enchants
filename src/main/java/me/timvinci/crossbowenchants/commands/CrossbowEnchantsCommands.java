@@ -11,9 +11,9 @@ import net.minecraft.server.command.ServerCommandSource;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-// A class responsible for registering the commands, not much else to say about it.
 public class CrossbowEnchantsCommands {
     public static void registerCommands() {
+        // Registering all the commands.
         CommandRegistrationCallback.EVENT.register((dispatcher, dedicated, environment) -> dispatcher.register(CommandManager.literal("crossbowenchants")
             .requires(source -> source.hasPermissionLevel(2))
                 .then(CommandManager.literal("disable")
@@ -89,12 +89,17 @@ public class CrossbowEnchantsCommands {
 
     private static int modifyProperty(CommandContext<ServerCommandSource> context, String methodName, String feedbackMessage, boolean newValue) {
         try {
+            // Getting the setter method of the property.
             Method propertySetter = CrossbowEnchantsConfig.class.getDeclaredMethod(methodName, boolean.class);
+            // Invoking the setter method with the new value.
             propertySetter.invoke(ConfigManager.getConfig(), newValue);
         } catch (InvocationTargetException | NoSuchMethodException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
+
+        // Saving the changes.
         ConfigManager.saveConfig();
+        // Sending feedback to the player who issued the command.
         context.getSource().sendFeedback(() -> TextStyler.styleEnabledDisabledText(feedbackMessage, newValue), true);
 
         return 1;

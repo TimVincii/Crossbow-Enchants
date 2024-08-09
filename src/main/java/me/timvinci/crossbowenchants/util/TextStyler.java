@@ -5,6 +5,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
 public class TextStyler {
+    // Setting the colors to use.
     private static final Formatting TITLE_COLOR = Formatting.GOLD;
     private static final Formatting TEXT_COLOR = Formatting.YELLOW;
     private static final Formatting POSITIVE_COLOR = Formatting.GREEN;
