@@ -5,7 +5,6 @@ import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
-// Accessor class for the CrossbowItemMixin class.
 @Mixin(CrossbowItem.class)
 public interface CrossbowItemAccessorMixin {
 

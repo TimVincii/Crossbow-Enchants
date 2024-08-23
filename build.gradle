@@ -3,7 +3,7 @@ plugins {
 	id 'maven-publish'
 }
 
-version = project.mod_version + "+" + project.minecraft_version
+version = project.mod_version + "+1.20-1.20.4"
 group = project.maven_group
 
 base {
@@ -20,16 +20,16 @@ dependencies {
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-	// Night-Config library
-	modImplementation "com.electronwill.night-config:core:${project.nightconfig_version}"
-	modImplementation "com.electronwill.night-config:toml:${project.nightconfig_version}"
-	include "com.electronwill.night-config:core:${project.nightconfig_version}"
-	include "com.electronwill.night-config:toml:${project.nightconfig_version}"
+	// Night-Config
+	modImplementation "com.electronwill.night-config:core:${project.night_config_version}"
+	modImplementation "com.electronwill.night-config:toml:${project.night_config_version}"
+	include "com.electronwill.night-config:core:${project.night_config_version}"
+	include "com.electronwill.night-config:toml:${project.night_config_version}"
 
 	// Fabric API
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	// Uncomment the following line to enable the deprecated Fabric API modules. 
+	// Uncomment the following line to enable the deprecated Fabric API modules.
 	// These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.
 
 	// modImplementation "net.fabricmc.fabric-api:fabric-api-deprecated:${project.fabric_version}"
