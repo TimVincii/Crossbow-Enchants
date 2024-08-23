@@ -49,7 +49,7 @@ Note that disabling any of the enchantments will result in the following outcome
 
 - The enchantments will no longer be appliable to crossbows through the use of an anvil.
 
-- **[Minecraft 1.20.4 Only]** The enchantments will stop functioning on pre-existing crossbows that are enchanted with them.
+- **[Minecraft 1.20 to 1.20.4]** The enchantments will stop functioning on pre-existing crossbows that are enchanted with them.
 
 ### Feature Behavior
 Note that disabling a feature will result in the following outcome:
