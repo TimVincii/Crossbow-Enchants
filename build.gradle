@@ -20,11 +20,11 @@ dependencies {
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-	// Night-Config library
-	modImplementation "com.electronwill.night-config:core:${project.nightconfig_version}"
-	modImplementation "com.electronwill.night-config:toml:${project.nightconfig_version}"
-	include "com.electronwill.night-config:core:${project.nightconfig_version}"
-	include "com.electronwill.night-config:toml:${project.nightconfig_version}"
+	// Night-Config
+	modImplementation "com.electronwill.night-config:core:${project.night_config_version}"
+	modImplementation "com.electronwill.night-config:toml:${project.night_config_version}"
+	include "com.electronwill.night-config:core:${project.night_config_version}"
+	include "com.electronwill.night-config:toml:${project.night_config_version}"
 
 	// Fabric API
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
