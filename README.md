@@ -63,6 +63,6 @@ In order to avoid making the crossbow too powerful in comparison to the bow, I d
 Although I might make a setting for this specific case in the future.
 
 ## Issues
-This is the first mod I developed for Fabric and Quilt, and while there are no currently known issues, I doubt it will stay that way in the future.
+If you have a question, a suggestion, or if you run into any other problem, please don't hesitate to [submit an issue](https://github.com/TimVincii/Crossbow-Enchants/issues).
 
-If you run into any problems, don't hesitate to [submit an issue](https://github.com/TimVincii/Crossbow-Enchants/issues).
+I will do my best to answer as fast as possible

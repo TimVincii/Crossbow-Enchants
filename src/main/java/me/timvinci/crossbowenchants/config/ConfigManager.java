@@ -18,14 +18,9 @@ public class ConfigManager {
     public static void loadConfig() {
         // Building the CommentedFileConfig.
         CommentedFileConfig fileConfig = buildFileConfig();
-        // Trying to load the config, and catching any parsing issues.
-        try {
-            fileConfig.load();
-        }
-        catch (ParsingException exception) {
-            // Adding more info to the parsing exception, then rethrowing it.
-            String exceptionMessage = Reference.MOD_NAME + ": Config parsing failed, please validate the config properties in .\\config\\crossbowenchants.toml. Exception message: " + exception.getMessage();
-            throw new ParsingException(exceptionMessage);
+        // Trying to load the config.
+        if (loadFileConfigFailed(fileConfig, "using default values for all properties")) {
+            return;
         }
 
         // Creating the config file if it doesn't exist or is empty.
@@ -46,17 +41,12 @@ public class ConfigManager {
         }
     }
 
-    public static void saveConfig() {
+    public static boolean saveConfig() {
         // Building the CommentedFileConfig.
         CommentedFileConfig fileConfig = buildFileConfig();
-        // Trying to load the config, and catching any parsing issues.
-        try {
-            fileConfig.load();
-        }
-        catch (ParsingException exception) {
-            // Adding more info to the parsing exception, then rethrowing it.
-            String exceptionMessage = Reference.MOD_NAME + ": Config parsing failed, please validate the config properties in .\\config\\crossbowenchants.toml. Exception message: " + exception.getMessage();
-            throw new ParsingException(exceptionMessage);
+        // Trying to load the config.
+        if (loadFileConfigFailed(fileConfig, "couldn't save values to config file")) {
+            return false;
         }
 
         // Setting the properties alongside their default values and their comments.
@@ -84,6 +74,8 @@ public class ConfigManager {
         // Saving and closing the file config.
         fileConfig.save();
         fileConfig.close();
+
+        return true;
     }
 
     public static void resetConfig() {
@@ -126,6 +118,17 @@ public class ConfigManager {
 
         // Returning 'true', the default value of all properties.
         return true;
+    }
+
+    private static boolean loadFileConfigFailed(CommentedFileConfig fileConfig, String additionalInfo) {
+        try {
+            // Trying to load the file config.
+            fileConfig.load();
+            return false;
+        } catch (ParsingException e) {
+            CrossbowEnchants.LOGGER.error("Configuration parsing failed, {}. Exception message: {}", additionalInfo, e.getMessage(), e);
+            return true;
+        }
     }
 
     private static CommentedFileConfig buildFileConfig() {

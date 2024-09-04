@@ -1,14 +1,18 @@
 package me.timvinci.crossbowenchants.mixins;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import me.timvinci.crossbowenchants.CrossbowEnchants;
 import me.timvinci.crossbowenchants.config.ConfigManager;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+
+import java.util.Map;
 
 @Mixin(Enchantment.class)
 public class EnchantmentMixin {
@@ -23,16 +27,29 @@ public class EnchantmentMixin {
             return original;
         }
 
-        //TODO - this isn't a very robust way to check which enchantment this Mixin is applied on..
-        String enchantmentName = ((EnchantmentAccessor)this).description().getString();
-        // Checking the name of the enchantment and returning based on it.
-        return switch (enchantmentName) {
-            case "Flame" -> ConfigManager.getConfig().isFlameEnabled();
-            case "Infinity" -> ConfigManager.getConfig().isInfinityEnabled();
-            case "Power" -> ConfigManager.getConfig().isPowerEnabled();
-            case "Punch" -> ConfigManager.getConfig().isPunchEnabled();
-            default -> false;
-        };
+        Enchantment enchantment = (Enchantment) (Object) this;
+        RegistryEntry<Enchantment> enchantmentEntry = CrossbowEnchants.dynamicRegistryManager.get(RegistryKeys.ENCHANTMENT).getEntry(enchantment);
+
+        // Taking a small precaution.
+        if (enchantmentEntry == null) {
+            return false;
+        }
+
+        if (enchantmentEntry.matchesKey(Enchantments.FLAME)) {
+            return ConfigManager.getConfig().isFlameEnabled();
+        }
+        else if (enchantmentEntry.matchesKey(Enchantments.INFINITY)) {
+            return ConfigManager.getConfig().isInfinityEnabled();
+        }
+        else if (enchantmentEntry.matchesKey(Enchantments.POWER)) {
+            return ConfigManager.getConfig().isPowerEnabled();
+        }
+        else if (enchantmentEntry.matchesKey(Enchantments.PUNCH)) {
+            return ConfigManager.getConfig().isPunchEnabled();
+        }
+        else {
+            return false;
+        }
     }
 
     @ModifyReturnValue(method = "canBeCombined", at = @At("RETURN"))

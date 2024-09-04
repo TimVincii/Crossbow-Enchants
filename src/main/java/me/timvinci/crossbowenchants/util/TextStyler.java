@@ -36,4 +36,8 @@ public class TextStyler {
                 .append(colorize(bool ? "enabled" : "disabled", bool ? POSITIVE_COLOR : NEGATIVE_COLOR))
                 .append(colorize(".", TEXT_COLOR));
     }
+
+    public static MutableText styleError(String errorMessage) {
+        return Text.literal(errorMessage).formatted(NEGATIVE_COLOR);
+    }
 }
