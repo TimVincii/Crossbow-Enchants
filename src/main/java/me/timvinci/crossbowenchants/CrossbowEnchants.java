@@ -9,6 +9,9 @@ import net.minecraft.registry.DynamicRegistryManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * Crossbow Enchants entrypoint class.
+ */
 public class CrossbowEnchants implements ModInitializer {
     public static DynamicRegistryManager dynamicRegistryManager;
     public static final Logger LOGGER = LogManager.getLogger(Reference.MOD_ID);

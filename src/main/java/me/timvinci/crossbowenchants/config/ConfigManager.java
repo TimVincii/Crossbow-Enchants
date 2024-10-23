@@ -10,6 +10,9 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.text.Text;
 import java.nio.file.Path;
 
+/**
+ * Manages an instance of the Crossbow Enchants config.
+ */
 public class ConfigManager {
 
     private static final Path CONFIG_FILE_PATH = FabricLoader.getInstance().getConfigDir().resolve("crossbowenchants.toml");

@@ -12,11 +12,16 @@ import net.minecraft.registry.entry.RegistryEntry;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-import java.util.Map;
-
+/**
+ * A mixin of the Enchantment class, used to make the exclusive bow enchantments applicable to the Crossbow, and to
+ * make Infinity and Mending as well as Piercing and Multishot compatible with one another.
+ */
 @Mixin(Enchantment.class)
 public class EnchantmentMixin {
 
+    /**
+     * Makes the bow exclusive enchantments applicable to the Crossbow.
+     */
     @ModifyReturnValue(method = "isAcceptableItem", at = @At("RETURN"))
     public boolean modifyIsAcceptableItemReturnValue(boolean original, ItemStack stack) {
         // Returning the original value if:
@@ -28,7 +33,7 @@ public class EnchantmentMixin {
         }
 
         Enchantment enchantment = (Enchantment) (Object) this;
-        RegistryEntry<Enchantment> enchantmentEntry = CrossbowEnchants.dynamicRegistryManager.get(RegistryKeys.ENCHANTMENT).getEntry(enchantment);
+        RegistryEntry<Enchantment> enchantmentEntry = CrossbowEnchants.dynamicRegistryManager.getOrThrow(RegistryKeys.ENCHANTMENT).getEntry(enchantment);
 
         // Taking a small precaution.
         if (enchantmentEntry == null) {
@@ -52,6 +57,9 @@ public class EnchantmentMixin {
         }
     }
 
+    /**
+     * Makes Infinity and Mending as well as Piercing and Multishot compatible with one another.
+     */
     @ModifyReturnValue(method = "canBeCombined", at = @At("RETURN"))
     private static boolean modifyCanBeCombinedReturnValue(boolean original, RegistryEntry<Enchantment> first, RegistryEntry<Enchantment> second) {
         // Returning the original value if:
@@ -72,7 +80,7 @@ public class EnchantmentMixin {
         // opposite order. Then returning the value based on the state of the feature.
         if (first.matchesKey(Enchantments.PIERCING) && second.matchesKey(Enchantments.MULTISHOT) ||
                 first.matchesKey(Enchantments.MULTISHOT) && second.matchesKey(Enchantments.PIERCING)) {
-            return ConfigManager.getConfig().isEnabled();
+            return ConfigManager.getConfig().isPiercingAndMultishotEnabled();
         }
 
         return false;

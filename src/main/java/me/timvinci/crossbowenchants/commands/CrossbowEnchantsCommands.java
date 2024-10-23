@@ -10,6 +10,9 @@ import net.minecraft.server.command.ServerCommandSource;
 
 import java.util.function.Consumer;
 
+/**
+ * Provides and holds commanding registering logic.
+ */
 public class CrossbowEnchantsCommands {
     public static void registerCommands() {
         CrossbowEnchantsConfig config = ConfigManager.getConfig();

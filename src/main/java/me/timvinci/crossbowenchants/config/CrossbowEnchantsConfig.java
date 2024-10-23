@@ -1,5 +1,8 @@
 package me.timvinci.crossbowenchants.config;
 
+/**
+ * Defines and holds the config properties.
+ */
 public class CrossbowEnchantsConfig {
     // Creating and setting a default value to the config options.
     private boolean enabled = true;

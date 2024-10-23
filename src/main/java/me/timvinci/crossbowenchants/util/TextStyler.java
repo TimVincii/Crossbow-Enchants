@@ -4,6 +4,9 @@ import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
+/**
+ * A compact class used for styling text.
+ */
 public class TextStyler {
     // Setting the colors to use.
     private static final Formatting TITLE_COLOR = Formatting.GOLD;
