@@ -72,7 +72,7 @@ public class EnchantmentMixin {
         // opposite order. Then returning the value based on the state of the feature.
         if (first.matchesKey(Enchantments.PIERCING) && second.matchesKey(Enchantments.MULTISHOT) ||
                 first.matchesKey(Enchantments.MULTISHOT) && second.matchesKey(Enchantments.PIERCING)) {
-            return ConfigManager.getConfig().isEnabled();
+            return ConfigManager.getConfig().isPiercingAndMultishotEnabled();
         }
 
         return false;
