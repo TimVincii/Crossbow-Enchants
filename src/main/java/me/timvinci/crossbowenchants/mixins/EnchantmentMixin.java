@@ -23,28 +23,29 @@ public class EnchantmentMixin {
         // The original was already set to true.
         // The stack isn't a crossbow.
         // Crossbow Enchants is disabled.
-        if (original || !stack.isOf(Items.CROSSBOW) || !ConfigManager.getConfig().isEnabled()) {
+        if (original || !(stack.isOf(Items.CROSSBOW) || stack.isOf(Items.BOW)) || !ConfigManager.getConfig().isEnabled()) {
             return original;
         }
 
         Enchantment enchantment = (Enchantment) (Object) this;
-        RegistryEntry<Enchantment> enchantmentEntry = CrossbowEnchants.dynamicRegistryManager.get(RegistryKeys.ENCHANTMENT).getEntry(enchantment);
 
-        // Taking a small precaution.
-        if (enchantmentEntry == null) {
-            return false;
+
+        if (stack.isOf(Items.BOW)) {
+            return enchantment == Enchantments.LOOTING && ConfigManager.getConfig().isLootingEnabled();
         }
-
-        if (enchantmentEntry.matchesKey(Enchantments.FLAME)) {
+        else if (enchantment == Enchantments.FLAME) {
             return ConfigManager.getConfig().isFlameEnabled();
         }
-        else if (enchantmentEntry.matchesKey(Enchantments.INFINITY)) {
+        else if (enchantment == Enchantments.INFINITY) {
             return ConfigManager.getConfig().isInfinityEnabled();
         }
-        else if (enchantmentEntry.matchesKey(Enchantments.POWER)) {
+        else if (enchantment == Enchantments.LOOTING) {
+            return ConfigManager.getConfig().isLootingEnabled();
+        }
+        else if (enchantment == Enchantments.POWER) {
             return ConfigManager.getConfig().isPowerEnabled();
         }
-        else if (enchantmentEntry.matchesKey(Enchantments.PUNCH)) {
+        else if (enchantment == Enchantments.PUNCH) {
             return ConfigManager.getConfig().isPunchEnabled();
         }
         else {
@@ -52,8 +53,8 @@ public class EnchantmentMixin {
         }
     }
 
-    @ModifyReturnValue(method = "canBeCombined", at = @At("RETURN"))
-    private static boolean modifyCanBeCombinedReturnValue(boolean original, RegistryEntry<Enchantment> first, RegistryEntry<Enchantment> second) {
+    @ModifyReturnValue(method = "canCombine", at = @At("RETURN"))
+    private boolean modifyCanCombineReturnValue(boolean original, Enchantment other) {
         // Returning the original value if:
         // The original was already set to true.
         // Crossbow Enchants is disabled.
@@ -61,17 +62,18 @@ public class EnchantmentMixin {
             return original;
         }
 
+        Enchantment enchantment = (Enchantment) (Object) this;
         // Checking if the first enchantment is infinity, and the second enchantment is mending, and the opposite order.
         // Then returning the value based on the state of the feature.
-        if (first.matchesKey(Enchantments.INFINITY) && second.matchesKey(Enchantments.MENDING) ||
-                first.matchesKey(Enchantments.MENDING) && second.matchesKey(Enchantments.INFINITY)) {
+        if (enchantment == Enchantments.INFINITY && other == Enchantments.MENDING ||
+                enchantment == Enchantments.MENDING && other == Enchantments.INFINITY) {
             return ConfigManager.getConfig().isInfinityAndMendingEnabled();
         }
 
         // Checking if the first enchantment is piercing, and the second enchantment is multishot, and the
         // opposite order. Then returning the value based on the state of the feature.
-        if (first.matchesKey(Enchantments.PIERCING) && second.matchesKey(Enchantments.MULTISHOT) ||
-                first.matchesKey(Enchantments.MULTISHOT) && second.matchesKey(Enchantments.PIERCING)) {
+        if (enchantment == Enchantments.PIERCING && other == Enchantments.MULTISHOT ||
+                enchantment == Enchantments.MULTISHOT && other == Enchantments.PIERCING) {
             return ConfigManager.getConfig().isPiercingAndMultishotEnabled();
         }
 

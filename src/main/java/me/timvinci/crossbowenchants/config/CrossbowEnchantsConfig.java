@@ -5,6 +5,7 @@ public class CrossbowEnchantsConfig {
     private boolean enabled = true;
     private boolean flameEnabled = true;
     private boolean infinityEnabled = true;
+    private boolean lootingEnabled = true;
     private boolean powerEnabled = true;
     private boolean punchEnabled = true;
     private boolean infinityAndMendingEnabled = true;
@@ -34,6 +35,10 @@ public class CrossbowEnchantsConfig {
     public void setInfinityEnabled(boolean infinityEnabled) {
         this.infinityEnabled = infinityEnabled;
     }
+
+    public boolean isLootingEnabled() { return lootingEnabled; }
+
+    public void setLootingEnabled(boolean lootingEnabled) { this.lootingEnabled = lootingEnabled; }
 
     public boolean isPowerEnabled() {
         return powerEnabled;

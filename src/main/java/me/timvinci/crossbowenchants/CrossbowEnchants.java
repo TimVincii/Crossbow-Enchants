@@ -10,7 +10,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class CrossbowEnchants implements ModInitializer {
-    public static DynamicRegistryManager dynamicRegistryManager;
     public static final Logger LOGGER = LogManager.getLogger(Reference.MOD_ID);
 
     @Override
@@ -22,10 +21,5 @@ public class CrossbowEnchants implements ModInitializer {
 
         // Registering the commands.
         CrossbowEnchantsCommands.registerCommands();
-
-        // Grabbing a reference to the registry manager on server startup.
-        ServerLifecycleEvents.SERVER_STARTING.register(listener -> {
-            dynamicRegistryManager = listener.getRegistryManager();
-        });
     }
 }
