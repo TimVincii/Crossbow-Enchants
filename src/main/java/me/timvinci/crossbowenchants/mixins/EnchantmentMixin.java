@@ -23,7 +23,7 @@ public class EnchantmentMixin {
         // The original was already set to true.
         // The stack isn't a crossbow.
         // Crossbow Enchants is disabled.
-        if (original || !stack.isOf(Items.CROSSBOW) || !ConfigManager.getConfig().isEnabled()) {
+        if (original || !(stack.isOf(Items.CROSSBOW) || stack.isOf(Items.BOW)) || !ConfigManager.getConfig().isEnabled()) {
             return original;
         }
 
@@ -35,11 +35,17 @@ public class EnchantmentMixin {
             return false;
         }
 
-        if (enchantmentEntry.matchesKey(Enchantments.FLAME)) {
+        if (stack.isOf(Items.BOW)) {
+            return enchantmentEntry.matchesKey(Enchantments.LOOTING) && ConfigManager.getConfig().isLootingEnabled();
+        }
+        else if (enchantmentEntry.matchesKey(Enchantments.FLAME)) {
             return ConfigManager.getConfig().isFlameEnabled();
         }
         else if (enchantmentEntry.matchesKey(Enchantments.INFINITY)) {
             return ConfigManager.getConfig().isInfinityEnabled();
+        }
+        else if (enchantmentEntry.matchesKey(Enchantments.LOOTING)) {
+            return ConfigManager.getConfig().isLootingEnabled();
         }
         else if (enchantmentEntry.matchesKey(Enchantments.POWER)) {
             return ConfigManager.getConfig().isPowerEnabled();
