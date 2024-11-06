@@ -37,6 +37,7 @@ public class ConfigManager {
             config.setEnabled(getBooleanProperty(fileConfig, "Enabled"));
             config.setFlameEnabled(getBooleanProperty(fileConfig, "FlameEnabled"));
             config.setInfinityEnabled(getBooleanProperty(fileConfig, "InfinityEnabled"));
+            config.setLootingEnabled(getBooleanProperty(fileConfig, "LootingEnabled"));
             config.setPowerEnabled(getBooleanProperty(fileConfig, "PowerEnabled"));
             config.setPunchEnabled(getBooleanProperty(fileConfig, "PunchEnabled"));
             config.setInfinityAndMendingEnabled(getBooleanProperty(fileConfig, "InfinityAndMendingEnabled"));
@@ -69,6 +70,9 @@ public class ConfigManager {
         fileConfig.set("InfinityEnabled", config.isInfinityEnabled());
         fileConfig.setComment("InfinityEnabled", "A toggle for the functionality of the Infinity enchantment on the crossbow.");
 
+        fileConfig.set("LootingEnabled", config.isLootingEnabled());
+        fileConfig.setComment("LootingEnabled", "A toggle for the functionality of the Looting enchantment on crossbows and bows.");
+
         fileConfig.set("PowerEnabled", config.isPowerEnabled());
         fileConfig.setComment("PowerEnabled", "A toggle for the functionality of the Power enchantment on the crossbow.");
 
@@ -91,6 +95,7 @@ public class ConfigManager {
         config.setEnabled(true);
         config.setFlameEnabled(true);
         config.setInfinityEnabled(true);
+        config.setLootingEnabled(true);
         config.setPowerEnabled(true);
         config.setPunchEnabled(true);
         config.setInfinityAndMendingEnabled(true);
@@ -103,6 +108,7 @@ public class ConfigManager {
                 .append(TextStyler.styleBooleanText("\nEnabled:", config.isEnabled()))
                 .append(TextStyler.styleBooleanText("\nFlame Enabled:", config.isFlameEnabled()))
                 .append(TextStyler.styleBooleanText("\nInfinity Enabled:", config.isInfinityEnabled()))
+                .append(TextStyler.styleBooleanText("\nLooting Enabled:", config.isLootingEnabled()))
                 .append(TextStyler.styleBooleanText("\nPower Enabled:", config.isPowerEnabled()))
                 .append(TextStyler.styleBooleanText("\nPunch Enabled:", config.isPunchEnabled()))
                 .append(TextStyler.styleBooleanText("\nInfinity-And-Mending Enabled:", config.isInfinityAndMendingEnabled()))

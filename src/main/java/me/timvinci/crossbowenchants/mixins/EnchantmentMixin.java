@@ -1,5 +1,6 @@
 package me.timvinci.crossbowenchants.mixins;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import me.timvinci.crossbowenchants.config.ConfigManager;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
@@ -14,57 +15,68 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(Enchantment.class)
 public class EnchantmentMixin {
 
-    // Allowing bow enchantments on the crossbow via injecting the isAcceptableItem method.
-    @Inject(method="isAcceptableItem", at=@At("TAIL"))
-    private boolean allowEnchantsOnCrossbow(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
-        // Returning if the enchantment is already acceptable on this item, Crossbow Enchants is disabled, or the item
-        // isn't a crossbow.
-        if (cir.getReturnValue() || !ConfigManager.getConfig().isEnabled() || !stack.isOf(Items.CROSSBOW)) {
-            return cir.getReturnValue();
+    @ModifyReturnValue(method = "isAcceptableItem", at = @At("RETURN"))
+    public boolean modifyIsAcceptableItemReturnValue(boolean original, ItemStack stack) {
+        // Returning the original value if:
+        // The original was already set to true.
+        // The stack isn't a crossbow.
+        // Crossbow Enchants is disabled.
+        if (original || !(stack.isOf(Items.CROSSBOW) || stack.isOf(Items.BOW)) || !ConfigManager.getConfig().isEnabled()) {
+            return original;
         }
 
-        // Checking the enchantment this mixin is applied on, and returning whether that enchantment is enabled.
-        if ((Object)this == Enchantments.FLAME) {
+        Enchantment enchantment = (Enchantment) (Object) this;
+        if (stack.isOf(Items.BOW)) {
+            return enchantment == Enchantments.LOOTING && ConfigManager.getConfig().isLootingEnabled();
+        }
+        else if (enchantment == Enchantments.FLAME) {
             return ConfigManager.getConfig().isFlameEnabled();
         }
-        else if ((Object) this == Enchantments.INFINITY) {
+        else if (enchantment == Enchantments.INFINITY) {
             return ConfigManager.getConfig().isInfinityEnabled();
         }
-        else if ((Object) this == Enchantments.POWER) {
+        else if (enchantment == Enchantments.LOOTING) {
+            return ConfigManager.getConfig().isLootingEnabled();
+        }
+        else if (enchantment == Enchantments.POWER) {
             return ConfigManager.getConfig().isPowerEnabled();
         }
-        else if ((Object)this == Enchantments.PUNCH) {
+        else if (enchantment == Enchantments.PUNCH) {
             return ConfigManager.getConfig().isPunchEnabled();
         }
-
-        return false;
+        else {
+            return false;
+        }
     }
 
-    // Making infinity and mending as well as piercing and multishot compatible with each other via injecting the
-    // canCombine method.
-    @Inject(method = "canCombine", at = @At("TAIL"))
-    private boolean allowFeatures(Enchantment other, CallbackInfoReturnable<Boolean> cir) {
-        // Returning if the enchantments are already compatible with each other, or if Crossbow Enchants is disabled.
-        if (cir.getReturnValue() || !ConfigManager.getConfig().isEnabled()) {
-            return cir.getReturnValue();
+    /**
+     * Makes Infinity and Mending as well as Piercing and Multishot compatible with one another.
+     */
+    @ModifyReturnValue(method = "canCombine", at = @At("RETURN"))
+    private boolean modifyCanCombineReturnValue(boolean original, Enchantment other) {
+        // Returning the original value if:
+        // The original was already set to true.
+        // Crossbow Enchants is disabled.
+        if (original || !ConfigManager.getConfig().isEnabled()) {
+            return original;
         }
 
-        // Checking if the enchantment this mixin is applied on and the other enchantment are a pair of infinity and
-        // mending, and then returning whether their feature is enabled.
-        if ((Object)this == Enchantments.INFINITY && other == Enchantments.MENDING ||
-            (Object)this == Enchantments.MENDING && other == Enchantments.INFINITY) {
+        Enchantment enchantment = (Enchantment) (Object) this;
+        // Checking if the first enchantment is infinity, and the second enchantment is mending, and the opposite order.
+        // Then returning the value based on the state of the feature.
+        if (enchantment == Enchantments.INFINITY && other == Enchantments.MENDING ||
+                enchantment == Enchantments.MENDING && other == Enchantments.INFINITY) {
             return ConfigManager.getConfig().isInfinityAndMendingEnabled();
         }
 
-        // Checking if the enchantment this mixin is applied on and the other enchantment are a pair of piercing and
-        // multishot, and then returning whether their feature is enabled.
-        if ((Object)this == Enchantments.PIERCING && other == Enchantments.MULTISHOT ||
-            (Object)this == Enchantments.MULTISHOT && other == Enchantments.PIERCING) {
+        // Checking if the first enchantment is piercing, and the second enchantment is multishot, and the
+        // opposite order. Then returning the value based on the state of the feature.
+        if (enchantment == Enchantments.PIERCING && other == Enchantments.MULTISHOT ||
+                enchantment == Enchantments.MULTISHOT && other == Enchantments.PIERCING) {
             return ConfigManager.getConfig().isPiercingAndMultishotEnabled();
         }
 
         return false;
     }
-
 }
 
