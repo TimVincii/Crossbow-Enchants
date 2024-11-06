@@ -4,10 +4,9 @@
 
 Crossbow Enchants is a customizable server or client sided mod, that enhances the crossbow experience by enabling bow exclusive enchantments on the crossbow. It currently supports Fabric and Quilt.
 
-In addition to that, the mod also supports making Infinity and Mending compatible on crossbows and bows, as well as making Piercing and Multishot compatible on crossbows.
+In addition to that, Crossbow Enchants also supports making Infinity and Mending compatible on crossbows and bows, as well as making Piercing and Multishot compatible on crossbows, and making Looting compatible on both bows and crossbows.
 
-
-Although this mod was initially made to work on the server side exclusively, it works perfectly fine on singleplayer too.
+Although Crossbow Enchants was initially made to work on the server side exclusively, it works perfectly fine on singleplayer too.
 If you plan on running this mod on the server side, the players do **not** need to have it installed on the client side.
 
 ## Commands
@@ -29,6 +28,8 @@ Enabled = true
 FlameEnabled = true
 #A toggle for the functionality of the Infinity enchantment on the crossbow.
 InfinityEnabled = true
+#A toggle for the functionality of the Looting enchantment on crossbows and bows.
+LootingEnabled = true
 #A toggle for the functionality of the Power enchantment on the crossbow.
 PowerEnabled = true
 #A toggle for the functionality of the Punch enchantment on the crossbow.
@@ -47,9 +48,9 @@ Fabric API: Crossbow Enchants requires the Fabric API to function properly. Ensu
 ### Enchantment Behavior
 Note that disabling any of the enchantments will result in the following outcome:
 
-- The enchantments will no longer be appliable to crossbows through the use of an anvil.
+- The enchantments will no longer be applicable to crossbows through the use of an anvil.
 
-- **[Minecraft 1.20.4 Only]** The enchantments will stop functioning on pre-existing crossbows that are enchanted with them.
+- **[Minecraft 1.20 to 1.20.4]** The enchantments will stop functioning on pre-existing crossbows that are enchanted with them (Except for Looting).
 
 ### Feature Behavior
 Note that disabling a feature will result in the following outcome:
@@ -63,6 +64,6 @@ In order to avoid making the crossbow too powerful in comparison to the bow, I d
 Although I might make a setting for this specific case in the future.
 
 ## Issues
-This is the first mod I developed for Fabric and Quilt, and while there are no currently known issues, I doubt it will stay that way in the future.
+If you have a question, a suggestion, or if you run into any other problem, please don't hesitate to [submit an issue](https://github.com/TimVincii/Crossbow-Enchants/issues).
 
-If you run into any problems, don't hesitate to [submit an issue](https://github.com/TimVincii/Crossbow-Enchants/issues).
+I will do my best to answer as fast as possible
