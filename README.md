@@ -66,4 +66,6 @@ Although I might make a setting for this specific case in the future.
 ## Issues
 If you have a question, a suggestion, or if you run into any other problem, please don't hesitate to [submit an issue](https://github.com/TimVincii/Crossbow-Enchants/issues).
 
-I will do my best to answer as fast as possible
+Please note: As of **December 2nd, 2024**, I’ve started my studies, which will keep me busy for the next few years. This means I will have significantly less time to actively work on the Crossbow Enchants or respond to feedback and issues.
+
+I’ll still do my best to address important issues and consider suggestions when possible, but response times may be slower.
