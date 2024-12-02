@@ -7,6 +7,7 @@ body:
     attributes:
       value: |
         Thanks for taking the time to report a bug with Crossbow Enchants!
+        Before submitting, please make sure to read the [Issues](https://github.com/TimVincii/Crossbow-Enchants#issues) section to understand response times and other important information.
   - type: textarea
     attributes:
       label: What happened?
