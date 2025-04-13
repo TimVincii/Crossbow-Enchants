@@ -29,8 +29,7 @@ public class TextStyler {
     public static Text styleBooleanText(String text, Boolean bool) {
         return Text.literal(text + ' ')
                 .formatted(TEXT_COLOR)
-                .append(colorizeBoolean(bool))
-                .append(colorize(".", TEXT_COLOR));
+                .append(colorizeBoolean(bool));
     }
 
     public static Text styleEnabledDisabledText(String text, Boolean bool) {
