@@ -18,7 +18,7 @@ public class CrossbowEnchantsCommands {
         CrossbowEnchantsConfig config = ConfigManager.getConfig();
         // Registering all the commands.
         CommandRegistrationCallback.EVENT.register((dispatcher, dedicated, environment) -> dispatcher.register(CommandManager.literal("crossbowenchants")
-            .requires(source -> source.hasPermissionLevel(2))
+            .requires(CommandManager.requirePermissionLevel(CommandManager.GAMEMASTERS_CHECK))
                 .then(CommandManager.literal("disable")
                         .executes(context -> modifyProperty(context, config::setEnabled, "Crossbow Enchants successfully", false))
                 )
