@@ -7,7 +7,7 @@ import me.timvinci.crossbowenchants.CrossbowEnchants;
 import me.timvinci.crossbowenchants.util.TextStyler;
 import me.timvinci.crossbowenchants.util.Reference;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.text.Text;
+import net.minecraft.network.chat.Component;
 import java.nio.file.Path;
 
 /**
@@ -97,7 +97,7 @@ public class ConfigManager {
         config.setPiercingAndMultishotEnabled(true);
     }
 
-    public static Text getConfigInfo() {
+    public static Component getConfigInfo() {
         // Returning a text filled with the state of every property.
         return TextStyler.styleTitleText("Crossbow Enchants [" + Reference.MOD_VERSION + ']')
                 .append(TextStyler.styleBooleanText("\nEnabled:", config.isEnabled()))
